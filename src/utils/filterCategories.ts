@@ -13,30 +13,29 @@ export const filterProductsByCategory = (category: string, products:ProductsResp
     sortOrder: 'asc' | 'desc',
     sortByRating: 'asc' | 'desc'
   ): ProductsResponse[] => {
-
-   
-
     let filteredProducts = products;
 
- 
+    // Filtrar productos por categoría si está seleccionada
     if (selectedCategory) {
       filteredProducts = products.filter((product) => product.category === selectedCategory);
     }
 
-  
-    return filteredProducts.slice().sort((a, b) => {
-
+    // Ordenar los productos filtrados por calificación o por precio
+    const sortedProducts = filteredProducts.slice().sort((a, b) => {
+      // Primero, si el usuario seleccionó ordenar por calificación
       if (sortByRating === 'asc') {
-        return a.rating.rate - b.rating.rate; 
+        return a.rating.rate - b.rating.rate; // Orden ascendente por calificación
       } else if (sortByRating === 'desc') {
-        return b.rating.rate - a.rating.rate; 
+        return b.rating.rate - a.rating.rate; // Orden descendente por calificación
       }
 
-     
+      // Si el usuario no seleccionó ordenar por calificación, ordenamos por precio
       if (sortOrder === 'asc') {
-        return a.price - b.price; 
+        return a.price - b.price; // Orden ascendente por precio (menor a mayor)
       } else {
-        return b.price - a.price; 
+        return b.price - a.price; // Orden descendente por precio (mayor a menor)
       }
     });
+
+    return sortedProducts;
   };
