@@ -1,12 +1,19 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Typography } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
  interface Props {
-    categories: [] | null 
+    categories: [] | null;
+    setSelectedCategory:any
  }   
 
-export const AsaideFilter = ({categories}:Props) => {
+export const AsaideFilter = ({categories, setSelectedCategory}:Props) => {
+
+
+    const handleClearFilt = ()=>{
+         setSelectedCategory('')
+
+    }
 
 
     return (
@@ -16,6 +23,8 @@ export const AsaideFilter = ({categories}:Props) => {
         
 
         >
+
+            <Button onClick={handleClearFilt} sx={{mb:1}} fullWidth variant='contained' >Limpiar filtros</Button>
 
             <Box
                 px={2}
@@ -39,7 +48,7 @@ export const AsaideFilter = ({categories}:Props) => {
                     </AccordionSummary>
                     <AccordionDetails>
                             {categories && categories.map((categorie, index)=>(
-                                <Typography key={index} >{categorie} </Typography>
+                                <Button onClick={()=>setSelectedCategory(categorie)} key={index} >{categorie} </Button>
                             ))}
                     </AccordionDetails>
                 </Accordion>

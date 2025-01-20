@@ -3,18 +3,25 @@ import { useProducts } from '../hooks/useProducts'
 import { useAppSelector } from '../../../redux/hooks'
 import { ProductsResponse } from '../../../interfaces/appInterfaces'
 import { AsaideFilter, CardProduct, SkeletonG } from '../components'
-//import { filterProductsByCategory } from '../../../utils/filterCategories'
-//import { useState } from 'react'
+import { filterProductsByCategory } from '../../../utils/filterCategories'
+import { useEffect, useState } from 'react'
 
 
 
 
 export const HomePage = () => {
   const { products, categories } = useAppSelector((state) => state.productsReducer)
-  //const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
   const { loading } = useProducts()
 
-  //const filteredProducts = filterProductsByCategory(selectedCategory, products!);
+  const filteredProducts = filterProductsByCategory(selectedCategory, products!);
+
+      console.log(selectedCategory)
+
+      useEffect(() => {
+       
+      }, [selectedCategory])
+      
 
 
 
@@ -28,7 +35,7 @@ export const HomePage = () => {
           md={2}
           sm={0}
         >
-          <AsaideFilter categories={categories} />
+          <AsaideFilter categories={categories} setSelectedCategory={setSelectedCategory} />
         </Grid>
         <Grid
           p={5}
@@ -40,7 +47,7 @@ export const HomePage = () => {
             loading ?
               <SkeletonG /> : <>
                 <Grid container spacing={2} p={2} >
-                  {products && products!.map((product: ProductsResponse, index) => (
+                  {filteredProducts && filteredProducts!.map((product: ProductsResponse, index) => (
                     <Grid
                       key={index}
                       item
