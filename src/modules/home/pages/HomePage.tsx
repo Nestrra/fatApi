@@ -20,7 +20,7 @@ export const HomePage = () => {
   const filteredProductsd = filterAndSortProducts(products!, selectedCategory, sortOrder, sortByRating);
   
 
-      console.log(filteredProductsd)
+
 
       useEffect(() => {
        

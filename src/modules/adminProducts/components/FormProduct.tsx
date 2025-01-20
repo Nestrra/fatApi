@@ -41,7 +41,7 @@ export const FormProduct = ({ product, edit }: Props) => {
         >
             {
                 (props) => (
-                    console.log(props.errors),
+                  
                     <Form>
 
                         <Grid

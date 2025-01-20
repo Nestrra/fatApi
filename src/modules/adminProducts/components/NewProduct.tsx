@@ -12,7 +12,7 @@ export const NewProduct = () => {
     const edit = location.state?.edit ? location.state?.edit : false;
 
 
-console.log(edit)
+
   return (
     <Container>
          <Box

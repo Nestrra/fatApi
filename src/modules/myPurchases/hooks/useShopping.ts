@@ -30,7 +30,7 @@ export const useShopping = () => {
                 if (response.status === 200) {
 
                     const  cartsList = filterProducts(products!, response.data)
-                    console.log(cartsList)
+                  
                     dispatch(carts(cartsList))
                     localStorage.setItem('carts', JSON.stringify(cartsList));
                     setloading(false)

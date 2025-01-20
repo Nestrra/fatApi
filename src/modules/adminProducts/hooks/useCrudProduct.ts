@@ -48,7 +48,7 @@ export const useCrudProduct = () => {
                     count:parseFloat(data.count) 
                 }} ];
 
-                console.log(updatedProducts)
+         
                 dispatch(productsList(updatedProducts))
                 localStorage.setItem('products', JSON.stringify(updatedProducts));
                 toast.success(  'Producto creado de manera correcta ')
@@ -58,7 +58,7 @@ export const useCrudProduct = () => {
                     rate: 0,
                     count: 0
                 }}];
-                console.log(updatedProducts)
+             
                 dispatch(productsList(updatedProducts))
                 localStorage.setItem('products', JSON.stringify(updatedProducts));
                 toast.success( 'Producto creado de manera correcta ')
@@ -103,7 +103,7 @@ export const useCrudProduct = () => {
                 product.id === id ? updatedProduct : product
             );
     
-            console.log(updatedProducts);
+        
             dispatch(productsList(updatedProducts))
             localStorage.setItem('products', JSON.stringify(updatedProducts));    
               
