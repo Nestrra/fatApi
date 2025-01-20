@@ -12,14 +12,9 @@ import { NewProduct } from './modules/adminProducts/components/NewProduct'
 
 export const RouterApp = () => {
 
-    const { user, loading } = useAppSelector((state) => state.authReducer)
+    const { user } = useAppSelector((state) => state.authReducer)
    
 
-    if (loading) {
-        return(
-            <></>
-        )
-    }
 
 
     if (!user) {
