@@ -35,8 +35,8 @@ export const MyPurchases = () => {
                 : 
                 <>
                     {
-                        carts && carts.map(carts =>(
-                            <CardShopping {...carts} />
+                        carts && carts.map((carts, index) =>(
+                            <CardShopping key={index} {...carts} />
                         ))
                     }
 

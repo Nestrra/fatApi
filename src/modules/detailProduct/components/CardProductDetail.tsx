@@ -1,9 +1,70 @@
 
 import { Box, CardMedia, Chip, Divider, Grid, Rating, Typography } from '@mui/material';
 import { LoadingBTN } from '../../../components';
-import { ProductsResponse } from '../../../interfaces/appInterfaces';
+import { CartUser, ProductsResponse } from '../../../interfaces/appInterfaces';
+import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { useShopping } from '../../myPurchases/hooks/useShopping';
+import { carts as cartsList } from "../../../redux/slices/myPurchasesSlice"
+import { toast } from 'react-toastify';
 
 export const CardProductDetail = (product:ProductsResponse) => {
+   const { carts } = useAppSelector((state) => state.cartsReducer)
+   const { user } = useAppSelector((state) => state.authReducer)
+    const {}= useShopping()
+  const dispatch = useAppDispatch()
+  const [loading, setloading] = useState(false)
+
+ 
+
+  const handleOnClick = ()=>{
+    setloading(true)
+    const prod = {
+       id:          product.id,
+          title:       product.title,
+          price:       product.price,
+          description: product.description,
+          category:    product.category,
+          image:       product.image,
+          rating:      {
+            rate:  product.rating.rate,
+            count: product.rating.count
+          },
+          quantity:  1,
+      
+    }
+
+   
+
+    const maxId = carts!.reduce((max, cart) => Math.max(max, cart.id), 0);
+
+   
+    const newId = maxId + 1;
+  
+    // Paso 3: Crear el nuevo carrito con el id generado
+    const newCart:any = {
+      id: newId,
+      userId: user!.id,
+      date: new Date().toISOString(),
+      products: [prod],
+      __v: 0
+    };
+    
+    setTimeout(() => {
+      
+    const updatedCarts:CartUser[] = [...carts!, newCart];
+     
+    dispatch(cartsList(updatedCarts));
+      
+    localStorage.setItem('carts', JSON.stringify(updatedCarts));
+      toast.success('Compra realizada de manera correcta')
+      setloading(false)  
+    }, 800);
+
+    
+
+  }
+
   return (
     <>
           <Grid
@@ -154,9 +215,10 @@ export const CardProductDetail = (product:ProductsResponse) => {
 
 
                             <LoadingBTN
+                              onClick={handleOnClick}
                               fullWidth
                               fontSize={18}
-                              isloading={false}
+                              isloading={loading}
                               title={'Comprar ahora'} />
                           </Grid>
     </>
