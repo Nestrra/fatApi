@@ -3,7 +3,7 @@ import { useProducts } from '../hooks/useProducts'
 import { useAppSelector } from '../../../redux/hooks'
 import { ProductsResponse } from '../../../interfaces/appInterfaces'
 import { AsaideFilter, CardProduct, SkeletonG } from '../components'
-import { filterAndSortProducts } from '../../../utils/filterCategories'
+//import { filterAndSortProducts } from '../../../utils/filterCategories'
 import { useEffect, useState } from 'react'
 
 
@@ -17,9 +17,9 @@ export const HomePage = () => {
   const { loading } = useProducts()
 
  
-  const filteredProductsd = filterAndSortProducts(products!, selectedCategory, sortOrder, sortByRating);
+  //const filteredProductsd = filterAndSortProducts(products!, selectedCategory, sortOrder, sortByRating);
   
-
+//console.log(filteredProductsd)
 
 
       useEffect(() => {
@@ -51,7 +51,7 @@ export const HomePage = () => {
             loading ?
               <SkeletonG /> : <>
                 <Grid container spacing={2} p={2} >
-                  {filteredProductsd && filteredProductsd!.map((product: ProductsResponse, index) => (
+                  {products && products.map((product: ProductsResponse, index) => (
                     <Grid
                       key={index}
                       item
