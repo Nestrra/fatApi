@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { allProducts } from "../../../services/products"
+import { Allcategories, allProducts } from "../../../services/products"
 import { useAppDispatch } from "../../../redux/hooks"
 import { toast } from "react-toastify"
-import { productsList } from "../../../redux/slices/productsSlice"
+import { categoriesList, productsList } from "../../../redux/slices/productsSlice"
 
 
 
@@ -13,6 +13,7 @@ export const useProducts = () => {
 
     useEffect(() => {
         getAllProducts()
+        getAllCategories()
     }, [])
 
 
@@ -44,8 +45,35 @@ export const useProducts = () => {
         }
     }
 
+    const getAllCategories = async () => {
+        setloading(true)
+        const categories = JSON.parse(localStorage.getItem('categories')!)
+
+      
+
+        if (!categories) {
+            try {
+                const response = await Allcategories()
+                if (response.status === 200) {
+                    dispatch(categoriesList(response.data))
+                    localStorage.setItem('categories', JSON.stringify(response.data));
+                    setloading(false)
+                }
+
+            } catch (error) {
+                toast.error('g')
+                setloading(false)
+            }
+        } else {
+
+            dispatch(categoriesList(categories))
+            setloading(false)
+
+        }
+    }
+
     return {
-loading
+    loading
 
 
     }

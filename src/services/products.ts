@@ -7,7 +7,11 @@ export const allProducts = async () => {
     return await api.get<ProductsResponse[]>(`/products` )
 
 }
+export const Allcategories = async () => {
+       
+    return await api.get<[]>(`/products/categories` )
 
+}
 
 
 export const singleProduct = async (id:number) => {
@@ -33,5 +37,5 @@ export const updateProduct = async (id:number, data:any) => {
 export const deleteProductForId = async (id:number) => {
        
     return await api.delete<NuewProductResponse>(`/products/${id}`)
-    
+
 }

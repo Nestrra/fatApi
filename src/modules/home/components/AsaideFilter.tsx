@@ -1,7 +1,14 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-export const AsaideFilter = () => {
+
+ interface Props {
+    categories: [] | null 
+ }   
+
+export const AsaideFilter = ({categories}:Props) => {
+
+
     return (
         <Box
 
@@ -31,7 +38,9 @@ export const AsaideFilter = () => {
                         <Typography component="span" fontWeight={'bold'} >Categoria</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-
+                            {categories && categories.map((categorie, index)=>(
+                                <Typography key={index} >{categorie} </Typography>
+                            ))}
                     </AccordionDetails>
                 </Accordion>
                 <Accordion

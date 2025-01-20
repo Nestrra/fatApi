@@ -3,13 +3,19 @@ import { useProducts } from '../hooks/useProducts'
 import { useAppSelector } from '../../../redux/hooks'
 import { ProductsResponse } from '../../../interfaces/appInterfaces'
 import { AsaideFilter, CardProduct, SkeletonG } from '../components'
+import { filterProductsByCategory } from '../../../utils/filterCategories'
+import { useState } from 'react'
 
 
 
 
 export const HomePage = () => {
-  const { products } = useAppSelector((state) => state.productsReducer)
+  const { products, categories } = useAppSelector((state) => state.productsReducer)
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
   const { loading } = useProducts()
+
+  const filteredProducts = filterProductsByCategory(selectedCategory, products!);
+
 
 
   return (
@@ -22,7 +28,7 @@ export const HomePage = () => {
           md={2}
           sm={0}
         >
-          <AsaideFilter />
+          <AsaideFilter categories={categories} />
         </Grid>
         <Grid
           p={5}

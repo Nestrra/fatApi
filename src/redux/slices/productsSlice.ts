@@ -7,6 +7,7 @@ import { ProductsResponse } from '../../interfaces/appInterfaces';
 
 interface productState {
   products: ProductsResponse[] | null;
+  categories:[] | null
 
 }
 
@@ -15,7 +16,7 @@ interface productState {
 const initialState: productState = {
 
   products: JSON.parse(localStorage.getItem('products')!) ||null,
-  
+  categories: null
 }
 
 export const productsSlice = createSlice({
@@ -24,7 +25,10 @@ export const productsSlice = createSlice({
   initialState,
   reducers: {
 
- 
+    categoriesList:  (state, action: PayloadAction<[]>) => {
+      state.categories = action.payload
+   },
+
     productsList: (state, action: PayloadAction<ProductsResponse[]>) => {
        state.products = action.payload
     },
@@ -32,5 +36,5 @@ export const productsSlice = createSlice({
   },
 })
 
-export const { productsList, } = productsSlice.actions
+export const { productsList,categoriesList  } = productsSlice.actions
 

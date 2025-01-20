@@ -3,11 +3,13 @@
 import { Form, Formik } from 'formik'
 import { modelFormProduct, validationProduct } from '../formModel'
 import { InputG, LoadingBTN } from '../../../components'
-import { Grid } from '@mui/material'
+import { Grid, MenuItem } from '@mui/material'
 import { initialValueProduct } from '../formModel/initialValuesForm'
 import { ProductsResponse } from '../../../interfaces/appInterfaces'
 import { TextArea } from './TextArea'
 import { useCrudProduct } from '../hooks/useCrudProduct'
+import { SelectG } from './SelectG'
+import { useAppSelector } from '../../../redux/hooks'
 
 
 
@@ -18,7 +20,7 @@ interface Props {
 
 
 export const FormProduct = ({ product, edit }: Props) => {
-
+   const { categories} = useAppSelector((state) => state.productsReducer)
     const { title, category, price, description, image, rate, count } = modelFormProduct
     const { loading, newProduct, upDProduct } = useCrudProduct()
  
@@ -62,20 +64,30 @@ export const FormProduct = ({ product, edit }: Props) => {
                                 />
                             </Grid>
                             <Grid
+                                mt={2}
                                 item
                                 md={6}
                                 xs={12}
                             >
-                                <InputG
-
+                                <SelectG
                                     setValues={props.setFieldValue}
                                     value={product ? product.category : ''}
-                                    marg='normal'
-                                    type='text'
-                                    size='small'
-                                    name={category.name}
-                                    label={category.label}
-                                />
+                                     name={category.name}
+                                     label={category.label}
+
+
+                                >
+                                
+                                    {categories!.map((categorie) => {
+                                        return <MenuItem
+                                            key={categorie}
+                                            value={categorie}>{categorie}
+                                        </MenuItem>
+
+                                    })}
+                                </SelectG>
+
+                               
                             </Grid>
                             <Grid
                                 item
