@@ -4,15 +4,18 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
  interface Props {
     categories: [] | null;
-    setSelectedCategory:any
+    setSelectedCategory:any;
+    setSortOrder:any;
+    setSortByRating:any
  }   
 
-export const AsaideFilter = ({categories, setSelectedCategory}:Props) => {
+export const AsaideFilter = ({categories, setSelectedCategory, setSortOrder, setSortByRating}:Props) => {
 
 
     const handleClearFilt = ()=>{
          setSelectedCategory('')
-
+        setSortOrder('asc')
+        setSortByRating('asc')
     }
 
 
@@ -24,7 +27,7 @@ export const AsaideFilter = ({categories, setSelectedCategory}:Props) => {
 
         >
 
-            <Button onClick={handleClearFilt} sx={{mb:1}} fullWidth variant='contained' >Limpiar filtros</Button>
+            <Button onClick={handleClearFilt} sx={{mb:1, fontSize:11}} fullWidth variant='contained' >Limpiar filtros</Button>
 
             <Box
                 px={2}
@@ -65,7 +68,8 @@ export const AsaideFilter = ({categories, setSelectedCategory}:Props) => {
                         <Typography component="span" fontWeight={'bold'} >Precio</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-
+                    <Button onClick={()=>setSortOrder('asc')} > Menor precio </Button>
+                    <Button onClick={()=>setSortOrder('desc')} > Mayor menor precio </Button>
                     </AccordionDetails>
                 </Accordion>
                 <Accordion
@@ -81,7 +85,8 @@ export const AsaideFilter = ({categories, setSelectedCategory}:Props) => {
                         <Typography component="span" fontWeight={'bold'} >Calificaión</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-
+                    <Button onClick={()=>setSortByRating('desc')} > Mejor calificación </Button>
+                    <Button onClick={()=>setSortByRating('asc')} > Menor calificación </Button>
                     </AccordionDetails>
                 </Accordion>
 

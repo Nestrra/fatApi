@@ -3,7 +3,7 @@ import { useProducts } from '../hooks/useProducts'
 import { useAppSelector } from '../../../redux/hooks'
 import { ProductsResponse } from '../../../interfaces/appInterfaces'
 import { AsaideFilter, CardProduct, SkeletonG } from '../components'
-import { filterProductsByCategory } from '../../../utils/filterCategories'
+import { filterAndSortProducts } from '../../../utils/filterCategories'
 import { useEffect, useState } from 'react'
 
 
@@ -12,15 +12,19 @@ import { useEffect, useState } from 'react'
 export const HomePage = () => {
   const { products, categories } = useAppSelector((state) => state.productsReducer)
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [sortByRating, setSortByRating] = useState<'asc' | 'desc'>('asc');
   const { loading } = useProducts()
 
-  const filteredProducts = filterProductsByCategory(selectedCategory, products!);
+ 
+  const filteredProductsd = filterAndSortProducts(products!, selectedCategory, sortOrder, sortByRating);
+  
 
-      console.log(selectedCategory)
+      console.log(filteredProductsd)
 
       useEffect(() => {
        
-      }, [selectedCategory])
+      }, [selectedCategory, sortOrder, sortByRating])
       
 
 
@@ -35,7 +39,7 @@ export const HomePage = () => {
           md={2}
           sm={0}
         >
-          <AsaideFilter categories={categories} setSelectedCategory={setSelectedCategory} />
+          <AsaideFilter setSortByRating={setSortByRating} setSortOrder={setSortOrder} categories={categories} setSelectedCategory={setSelectedCategory} />
         </Grid>
         <Grid
           p={5}
@@ -47,7 +51,7 @@ export const HomePage = () => {
             loading ?
               <SkeletonG /> : <>
                 <Grid container spacing={2} p={2} >
-                  {filteredProducts && filteredProducts!.map((product: ProductsResponse, index) => (
+                  {filteredProductsd && filteredProductsd!.map((product: ProductsResponse, index) => (
                     <Grid
                       key={index}
                       item

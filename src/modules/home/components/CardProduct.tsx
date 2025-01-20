@@ -5,10 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { FormatPath } from '../../../utils/path';
 
 
+
  
 
 export const CardProduct = (product: ProductsResponse) => {
 
+  
 
   const navigate = useNavigate()
 
@@ -56,7 +58,7 @@ export const CardProduct = (product: ProductsResponse) => {
                     {product.title}
                 </Typography>
                
-                <Rating name="size-small" defaultValue={product.rating.rate} precision={0.1} size="small" readOnly />
+                <Rating name="size-small"  value={product.rating.rate} precision={0.1} size="small" readOnly />
                 <Typography
                 color='black' 
                     variant="body1"
