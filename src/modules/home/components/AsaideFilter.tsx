@@ -49,7 +49,7 @@ export const AsaideFilter = ({categories, setSelectedCategory, setSortOrder, set
                     >
                         <Typography component="span" fontWeight={'bold'} >Categoria</Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails sx={{ display:'flex', flexDirection:'column' }} >
                             {categories && categories.map((categorie, index)=>(
                                 <Button onClick={()=>setSelectedCategory(categorie)} key={index} >{categorie} </Button>
                             ))}
@@ -67,7 +67,7 @@ export const AsaideFilter = ({categories, setSelectedCategory, setSortOrder, set
                     >
                         <Typography component="span" fontWeight={'bold'} >Precio</Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails sx={{ display:'flex', flexDirection:'column' }} >
                     <Button onClick={()=>setSortOrder('asc')} > Menor precio </Button>
                     <Button onClick={()=>setSortOrder('desc')} > Mayor menor precio </Button>
                     </AccordionDetails>
@@ -84,7 +84,7 @@ export const AsaideFilter = ({categories, setSelectedCategory, setSortOrder, set
                     >
                         <Typography component="span" fontWeight={'bold'} >Calificaión</Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails sx={{ display:'flex', flexDirection:'column' }} >
                     <Button onClick={()=>setSortByRating('desc')} > Mejor calificación </Button>
                     <Button onClick={()=>setSortByRating('asc')} > Menor calificación </Button>
                     </AccordionDetails>
