@@ -3,18 +3,18 @@ import { useProducts } from '../hooks/useProducts'
 import { useAppSelector } from '../../../redux/hooks'
 import { ProductsResponse } from '../../../interfaces/appInterfaces'
 import { AsaideFilter, CardProduct, SkeletonG } from '../components'
-import { filterProductsByCategory } from '../../../utils/filterCategories'
-import { useState } from 'react'
+//import { filterProductsByCategory } from '../../../utils/filterCategories'
+//import { useState } from 'react'
 
 
 
 
 export const HomePage = () => {
   const { products, categories } = useAppSelector((state) => state.productsReducer)
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  //const [selectedCategory, setSelectedCategory] = useState<string>('');
   const { loading } = useProducts()
 
-  const filteredProducts = filterProductsByCategory(selectedCategory, products!);
+  //const filteredProducts = filterProductsByCategory(selectedCategory, products!);
 
 
 
